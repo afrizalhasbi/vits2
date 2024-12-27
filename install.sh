@@ -1,19 +1,13 @@
-python -m pip install --upgrade --force-reinstall regex
-python -m pip install --force-reinstall soundfile
-python -m pip install --force-reinstall gradio
-python -m pip install imageio==2.4.1
-python -m pip install --upgrade youtube-dl
-python -m pip install moviepy
+pip install --upgrade --force-reinstall regex soundfile gradio
+pip install imageio==2.4.1
+pip install --upgrade youtube-dl moviepy
 
-python -m pip install --no-build-isolation -r requirements.txt
-python -m pip install --upgrade numpy
-python -m pip install --upgrade --force-reinstall numba
-python -m pip install --upgrade Cython
-
-python -m pip install --upgrade pyzmq
-python -m pip install pydantic==1.10.4
-python -m pip install ruamel.yaml
-python -m pip install git+https://github.com/openai/whisper.git
+pip install --no-build-isolation -r requirements.txt
+pip install -U numpy Cython pyzmq
+pip install --upgrade --force-reinstall numba
+pip install pydantic==1.10.4
+pip install ruamel.yaml
+pip install git+https://github.com/openai/whisper.git
 
 # build monotonic align
 cd monotonic_align/

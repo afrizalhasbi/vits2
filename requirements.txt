@@ -10,6 +10,10 @@ torchvision
 torchaudio
 unidecode
 pyopenjtalk-prebuilt
+moviepy
+librosa
+soundfile
+datasets
 jamo
 pypinyin
 jieba

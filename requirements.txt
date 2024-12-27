@@ -9,6 +9,7 @@ torch
 torchvision
 torchaudio
 unidecode
+pyopenjtalk
 pyopenjtalk-prebuilt
 moviepy
 librosa

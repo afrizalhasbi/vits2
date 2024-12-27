@@ -8,7 +8,8 @@ ds_name = sys.argv[1]
 ds = load_dataset(ds_name)['train']
 output_dir = ds_name.split("/")[-1]
 os.makedirs(output_dir, exist_ok=True)
-txt_output = ""
+txtout = []  # Changed to list instead of string
+
 for i, item in tqdm(enumerate(ds), total=len(ds)):  # or your specific split
     audio_data = item['audio']
     audio_path = os.path.join(output_dir, f"{i}.mp3")
@@ -19,4 +20,8 @@ for i, item in tqdm(enumerate(ds), total=len(ds)):  # or your specific split
     else:  # if audio is already a file path
         import shutil
         shutil.copy(audio_data, audio_path)
-    txt.append(f"{audio_path}|{output_dir}|[LANG]EN[LANG]")
+    txtout.append(f"{audio_path}|{output_dir}|[LANG]{item['text']}[LANG]\n")
+
+with open("./long_character_anno.txt", 'w', encoding='utf-8') as f:
+    for line in txtout:
+        f.write(line)

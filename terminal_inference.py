@@ -7,18 +7,10 @@ import commons
 from mel_processing import spectrogram_torch
 import utils
 from models import SynthesizerTrn
-import gradio as gr
 import librosa
-import webbrowser
 
 from text import text_to_sequence, _clean_text
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
-import logging
-logging.getLogger("PIL").setLevel(logging.WARNING)
-logging.getLogger("urllib3").setLevel(logging.WARNING)
-logging.getLogger("markdown_it").setLevel(logging.WARNING)
-logging.getLogger("httpx").setLevel(logging.WARNING)
-logging.getLogger("asyncio").setLevel(logging.WARNING)
 
 language_marks = {
     "Japanese": "",
@@ -112,7 +104,7 @@ if __name__ == "__main__":
 
     status, (sr, audio) = tts_fn(
         text=args.text, 
-        speaker=args.source_voice, 
+        speaker=args.src, 
         language='Mix',  # or choose from ['日本語','简体中文','English','Mix']
         speed=1.0
     )

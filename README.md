@@ -12,6 +12,7 @@ bash install.sh
 python hfds.py <ds_name>
 python preprocess_v2.py --add_auxiliary_data True --languages CJE
 python finetune_speaker_v2.py -m ./OUTPUT_MODEL --max_epochs "10" --drop_speaker_embed False --cont True
+python VC_inference.py --model_dir ./OUTPUT_MODEL/G_latest.pth --share True
 ```
 [中文文档请点击这里](https://github.com/Plachtaa/VITS-fast-fine-tuning/blob/main/README_ZH.md)
 # VITS Fast Fine-tuning

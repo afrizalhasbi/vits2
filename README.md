@@ -1,4 +1,9 @@
 ```
+conda create -n py38 python=3.8
+export PATH="/opt/conda/bin:$PATH"
+. /opt/conda/etc/profile.d/conda.sh
+. ~/.bashrc
+conda activate py38
 git clone https://github.com/afrizalhasbi/vits2
 cd vits2
 bash install.sh

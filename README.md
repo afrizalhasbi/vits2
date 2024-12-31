@@ -8,7 +8,11 @@ git clone https://github.com/afrizalhasbi/vits2
 cd vits2
 bash install.sh
 ```
-
+```
+python hfds.py <ds_name>
+python preprocess_v2.py --add_auxiliary_data True --languages CJE
+python finetune_speaker_v2.py -m ./OUTPUT_MODEL --max_epochs "10" --drop_speaker_embed False --cont True
+```
 [中文文档请点击这里](https://github.com/Plachtaa/VITS-fast-fine-tuning/blob/main/README_ZH.md)
 # VITS Fast Fine-tuning
 This repo will guide you to add your own character voices, or even your own voice, into existing VITS TTS model

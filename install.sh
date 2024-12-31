@@ -1,9 +1,9 @@
-pip install --upgrade --force-reinstall regex soundfile gradio
+pip install --upgrade --force-reinstall regex gradio
 pip install imageio==2.4.1
 pip install --upgrade youtube-dl moviepy
 
 pip install --no-build-isolation -r requirements.txt
-pip install -U numpy Cython pyzmq
+pip install -U numpy Cython pyzmq librosa soundfile datasets
 pip install --upgrade --force-reinstall numba
 pip install pydantic==1.10.4
 pip install ruamel.yaml

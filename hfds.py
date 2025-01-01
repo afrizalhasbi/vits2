@@ -20,7 +20,7 @@ for i, item in tqdm(enumerate(ds), total=len(ds)):  # or your specific split
     else:  # if audio is already a file path
         import shutil
         shutil.copy(audio_data, audio_path)
-    txtout.append(f"{audio_path}|{output_dir}|[LANG]{item['text']}[LANG]\n")
+    txtout.append(f"{audio_path}|{output_dir}|[EN]{item['text']}[EN]\n")
 
 with open("./long_character_anno.txt", 'w', encoding='utf-8') as f:
     for line in txtout:

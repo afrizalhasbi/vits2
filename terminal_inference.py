@@ -8,6 +8,7 @@ from mel_processing import spectrogram_torch
 import utils
 from models import SynthesizerTrn
 import librosa
+import sounfile as sf
 
 from text import text_to_sequence, _clean_text
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
@@ -99,7 +100,11 @@ if __name__ == "__main__":
     tts_fn = create_tts_fn(net_g, hps, speaker_ids)
     print(f"Available speaker_ids: {speaker_ids}")
     vc_fn = create_vc_fn(net_g, hps, speaker_ids)
-    # hps_data_sampling_rate, audio = vc_fn(
+    
+    sr, audio = tts_fn(args.text, speaker='fl-hqmale', language='en', speed=1)
+    sf.write("output.mp3", audio, sr, format="MP3")
+    print("Audio saved to output.mp3")
+
 
     #-------- comment first --------#
 
@@ -129,5 +134,3 @@ if __name__ == "__main__":
     # )
 
     # # Save output to an MP3 file
-    # sf.write("output.mp3", audio, sr, format="MP3")
-    # print("Audio saved to output.mp3")

@@ -79,7 +79,7 @@ def create_vc_fn(model, hps, speaker_ids):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_dir", default="OUTPUT_MODEL/G_latest.pth", help="directory to your fine-tuned model")
-    parser.add_argument("--config_dir", default="configs/finetune_speaker.json", help="directory to your model config file")
+    parser.add_argument("--config_dir", default="configs/modified_finetune_speaker.json", help="directory to your model config file")
     parser.add_argument("--share", default=False, help="make link public (used in colab)")
     parser.add_argument("--src", required=True, help="")
     parser.add_argument("--text", required=True, help="")

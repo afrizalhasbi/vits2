@@ -40,7 +40,7 @@ def create_tts_fn(model, hps, speaker_ids):
             audio = model.infer(x_tst, x_tst_lengths, sid=sid, noise_scale=.667, noise_scale_w=0.8,
                                 length_scale=1.0 / speed)[0][0, 0].data.cpu().float().numpy()
         del stn_tst, x_tst, x_tst_lengths, sid
-        return "Success", (hps.data.sampling_rate, audio)
+        return hps.data.sampling_rate, audio
 
     return tts_fn
 

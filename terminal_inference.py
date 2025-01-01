@@ -99,7 +99,7 @@ if __name__ == "__main__":
     tts_fn = create_tts_fn(net_g, hps, speaker_ids)
     print(f"Available speaker_ids: {speaker_ids}")
     vc_fn = create_vc_fn(net_g, hps, speaker_ids)
-    hps_data_sampling_rate, audio = vc_fn(
+    # hps_data_sampling_rate, audio = vc_fn(
 
     #-------- comment first --------#
 

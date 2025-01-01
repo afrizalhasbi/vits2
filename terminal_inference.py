@@ -87,13 +87,13 @@ if __name__ == "__main__":
     args = parser.parse_args()
     hps = utils.get_hparams_from_file(args.config_dir)
 
+
     net_g = SynthesizerTrn(
         len(hps.symbols),
         hps.data.filter_length // 2 + 1,
         hps.train.segment_size // hps.data.hop_length,
         n_speakers=hps.data.n_speakers,
-        **hps.model
-    ).to(device)
+        **hps.model).to(device)
     _ = net_g.eval()
 
     _ = utils.load_checkpoint(args.model_dir, net_g, None)
@@ -102,13 +102,33 @@ if __name__ == "__main__":
     tts_fn = create_tts_fn(net_g, hps, speaker_ids)
     vc_fn = create_vc_fn(net_g, hps, speaker_ids)
 
-    status, (sr, audio) = tts_fn(
-        text=args.text, 
-        speaker=args.src, 
-        language='Mix',  # or choose from ['日本語','简体中文','English','Mix']
-        speed=1.0
-    )
+    #-------- comment first --------#
 
-    # Save output to an MP3 file
-    sf.write("output.mp3", audio, sr, format="MP3")
-    print("Audio saved to output.mp3")
+    # args = parser.parse_args()
+    # hps = utils.get_hparams_from_file(args.config_dir)
+
+    # net_g = SynthesizerTrn(
+    #     len(hps.symbols),
+    #     hps.data.filter_length // 2 + 1,
+    #     hps.train.segment_size // hps.data.hop_length,
+    #     n_speakers=hps.data.n_speakers,
+    #     **hps.model
+    # ).to(device)
+    # _ = net_g.eval()
+
+    # _ = utils.load_checkpoint(args.model_dir, net_g, None)
+    # speaker_ids = hps.speakers
+    # speakers = list(hps.speakers.keys())
+    # tts_fn = create_tts_fn(net_g, hps, speaker_ids)
+    # vc_fn = create_vc_fn(net_g, hps, speaker_ids)
+
+    # status, (sr, audio) = tts_fn(
+    #     text=args.text, 
+    #     speaker=args.src, 
+    #     language='Mix',  # or choose from ['日本語','简体中文','English','Mix']
+    #     speed=1.0
+    # )
+
+    # # Save output to an MP3 file
+    # sf.write("output.mp3", audio, sr, format="MP3")
+    # print("Audio saved to output.mp3")

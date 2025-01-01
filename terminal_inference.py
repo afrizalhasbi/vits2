@@ -45,14 +45,12 @@ def create_tts_fn(model, hps, speaker_ids):
     return tts_fn
 
 def create_vc_fn(model, hps, speaker_ids):
-    def vc_fn(original_speaker, target_speaker, record_audio, upload_audio):
-        input_audio = record_audio if record_audio is not None else upload_audio
-        if input_audio is None:
-            return "You need to record or upload an audio", None
-        sampling_rate, audio = input_audio
+    def vc_fn(original_speaker, target_speaker, audio_file_path):
+        audio, sampling_rate = librosa.load(audio_file_path, sr=None, mono=True)
+    
         original_speaker_id = speaker_ids[original_speaker]
         target_speaker_id = speaker_ids[target_speaker]
-
+    
         audio = (audio / np.iinfo(audio.dtype).max).astype(np.float32)
         if len(audio.shape) > 1:
             audio = librosa.to_mono(audio.transpose(1, 0))
@@ -72,8 +70,7 @@ def create_vc_fn(model, hps, speaker_ids):
             audio = model.voice_conversion(spec, spec_lengths, sid_src=sid_src, sid_tgt=sid_tgt)[0][
                 0, 0].data.cpu().float().numpy()
         del y, spec, spec_lengths, sid_src, sid_tgt
-        return "Success", (hps.data.sampling_rate, audio)
-
+        return hps.data.sampling_rate, audio
     return vc_fn
 
 if __name__ == "__main__":
@@ -100,7 +97,9 @@ if __name__ == "__main__":
     speaker_ids = hps.speakers
     speakers = list(hps.speakers.keys())
     tts_fn = create_tts_fn(net_g, hps, speaker_ids)
+    print(f"Available speaker_ids: {speaker_ids}")
     vc_fn = create_vc_fn(net_g, hps, speaker_ids)
+    hps_data_sampling_rate, audio = vc_fn(
 
     #-------- comment first --------#
 

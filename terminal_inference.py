@@ -52,7 +52,8 @@ def create_vc_fn(model, hps, speaker_ids):
         original_speaker_id = speaker_ids[original_speaker]
         target_speaker_id = speaker_ids[target_speaker]
     
-        audio = (audio / np.iinfo(audio.dtype).max).astype(np.float32)
+        print(str(audio)[:100])
+        audio = (audio / np.finfo(audio.dtype).max).astype(np.float32)
         if len(audio.shape) > 1:
             audio = librosa.to_mono(audio.transpose(1, 0))
         if sampling_rate != hps.data.sampling_rate:
@@ -101,7 +102,8 @@ if __name__ == "__main__":
     print(f"Available speaker_ids: {speaker_ids}")
     vc_fn = create_vc_fn(net_g, hps, speaker_ids)
     
-    sr, audio = tts_fn(args.text, speaker='fl-hqmale', language='English', speed=1)
+    sr, audio = tts_fn(args.text, speaker='Surya', language='English', speed=1)
+    # sr, audio = vc_fn('Tio', 'Surya', 'tio.mp3')
     sf.write("output.mp3", audio, sr, format="MP3")
     print("Audio saved to output.mp3")
 
